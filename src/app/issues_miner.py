@@ -11,7 +11,7 @@ class RepositoryIssue(GitHubIssueIUri):
         empty = False
         page = 1
         all_issues = []
-        uri = f'{super().uri()}/issues?per_page=100&direction=asc'
+        uri = f'{super().url()}/issues?per_page=100&direction=asc'
         while not empty:
             try:
                 uri = f'{uri}&state={state}&page={page}'
