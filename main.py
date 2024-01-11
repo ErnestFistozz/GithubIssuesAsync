@@ -49,9 +49,9 @@ async def collect_release_data(input_file: str, output: str) -> None:
 
 async def main(
         input_file='repositories.txt',
-        issues_file='issues.txt',
-        comments_file='comments.txt',
-        release_files='releases.txt'
+        issues_file='issues.csv',
+        comments_file='comments.csv',
+        release_files='releases.csv'
 ) -> None:
     await collect_issue_data(input_file, issues_file)
     await collect_release_data(input_file, comments_file)
