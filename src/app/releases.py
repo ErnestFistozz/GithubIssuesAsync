@@ -29,7 +29,7 @@ class GitHubReleaseMiner(GitHubIssueIUri):
                             all_releases.append(gh_release)
                     else:
                         empty = True
-                except (KeyError, aiohttp.ClientError):
+                except Exception as e:
                     pass
                 page += 1
         return all_releases

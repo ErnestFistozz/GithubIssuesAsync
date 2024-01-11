@@ -36,7 +36,7 @@ class GitHubIssuesMiner(GitHubIssueIUri):
                             all_issues.append(current_issue)
                     else:
                         empty = True
-                except (KeyError, aiohttp.ClientError) as e:
+                except Exception as e:
                     pass
                 page += 1
         return all_issues

@@ -28,7 +28,7 @@ class GitHubCommentsMiner(GitHubIssueIUri):
                             all_comments.append(issue_comment)
                     else:
                         empty = True
-                except (KeyError, aiohttp.ClientError):
+                except Exception as e:
                     pass
                 page += 1
         return all_comments
