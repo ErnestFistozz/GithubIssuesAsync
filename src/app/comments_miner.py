@@ -40,7 +40,7 @@ class IssueComments(GitHubIssueIUri):
         return all_issues
 
     async def main(self):
-        issues = await self.fetch_all_comments(self.uri())
+        issues = await self.fetch_all_comments(self.url())
         return issues
 
 

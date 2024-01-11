@@ -11,7 +11,7 @@ class GitHubCommentsMiner(GitHubIssueIUri):
         page = 1
         async with aiohttp.ClientSession() as session:
             while not empty:
-                uri = f'{super().uri()}/issues/comments?per_page=100&page={page}&direction=asc'
+                uri = f'{self.url()}/issues/comments?per_page=100&page={page}&direction=asc'
                 try:
                     comments = await super().fetch_data(session, uri)
                     if comments:

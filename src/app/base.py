@@ -14,7 +14,7 @@ class GitHubIssueIUri:
     def repo(self) -> str:
         return self.repository
 
-    def uri(self) -> str:
+    def url(self) -> str:
         return self.uri
 
     async def fetch_data(self, session, uri):

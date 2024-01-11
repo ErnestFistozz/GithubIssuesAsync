@@ -11,7 +11,7 @@ class GitHubReleaseMiner(GitHubIssueIUri):
         page = 1
         async with aiohttp.ClientSession() as session:
             while not empty:
-                uri = f'{super().uri()}/releases?per_page=100&page={page}&direction=asc'
+                uri = f'{self.url()}/releases?per_page=100&page={page}&direction=asc'
                 try:
                     releases = await super().fetch_data(session, uri)
                     if releases:

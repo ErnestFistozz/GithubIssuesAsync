@@ -13,7 +13,7 @@ class GitHubIssuesMiner(GitHubIssueIUri):
         async with aiohttp.ClientSession() as session:
             while not empty:
                 try:
-                    uri = f'{self.uri()}/issues?per_page=100&direction=asc&state={state}&page={page}'
+                    uri = f'{self.url()}/issues?per_page=100&direction=asc&state={state}&page={page}'
                     issues = await super().fetch_data(session, uri)
                     if issues:
                         for issue in issues:
