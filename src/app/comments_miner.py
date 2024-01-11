@@ -6,7 +6,7 @@ class IssueComments(GitHubIssueIUri):
     def __init__(self, organisation, repository: str) -> None:
         super().__init__(organisation, repository)
 
-    async def fetch_github_issues(self, session, url, page, retry_attempts=3):
+    async def fetch_github_comments(self, session, url, page, retry_attempts=3):
         params = {'page': page, 'per_page': 100}
         async with session.get(url, params=params) as response:
             if response.status == 200:
@@ -17,21 +17,20 @@ class IssueComments(GitHubIssueIUri):
                 if retry_after > 0:
                     print(f"Rate limit exceeded. Retrying after {retry_after} seconds.")
                     await asyncio.sleep(retry_after)
-                    return await self.fetch_github_issues(session, url, page)
+                    return await self.fetch_github_comments(session, url, page)
                 else:
                     await asyncio.sleep(2 ** retry_attempts)
-                    return await self.fetch_github_issues(session, url, page)
+                    return await self.fetch_github_comments(session, url, page)
             else:
                 return {}
-                #raise Exception(f"Failed to fetch data from {url}. Status code: {response.status}")
 
-    async def fetch_all_issues(self, url):
+    async def fetch_all_comments(self, url):
         all_issues = []
         async with aiohttp.ClientSession() as session:
             page = 1
             while True:
                 try:
-                    data = await self.fetch_github_issues(session, url, page)
+                    data = await self.fetch_github_comments(session, url, page)
                     if not data:
                         break  # No more issues
                     all_issues.extend(data)
@@ -41,7 +40,7 @@ class IssueComments(GitHubIssueIUri):
         return all_issues
 
     async def main(self):
-        issues = await self.fetch_all_issues(self.uri())
+        issues = await self.fetch_all_comments(self.uri())
         return issues
 
 
